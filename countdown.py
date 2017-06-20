@@ -51,7 +51,7 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
 
         answer = ""
         for row in cur.fetchall():
-            answer = ("{\"ordered\":%d, \"last_order\":'%s', \"tickets_left\":%d}\n" %
+            answer = ("{\"ordered\":%d, \"last_order\":\"%s\", \"tickets_left\":%d}\n" %
                       (row[0], row[1], 3050 - int(row[0])))
 
         db.close()
