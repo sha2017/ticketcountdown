@@ -29,6 +29,9 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(self.numbers().encode("utf-8"))
 
+    def log_message(self, format, *args):
+        return
+
     def numbers(self):
         db = MySQLdb.connect(host=DATABASE_HOST,
                              user=DATABASE_USER,
