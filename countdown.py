@@ -10,6 +10,9 @@ DATABASE_DB = 'pretix'
 SERVER_IP = '0.0.0.0'
 SERVER_PORT = 4242
 
+MAX_TICKETS = 3050
+
+
 class MyHandler(http.server.BaseHTTPRequestHandler):
 
     def do_HEAD(self):
@@ -54,8 +57,14 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
 
         answer = ""
         for row in cur.fetchall():
-            answer = ("{\"ordered\":%d, \"last_order\":\"%s\", \"tickets_left\":%d}\n" %
-                      (row[0], row[1], 3050 - int(row[0])))
+            number_sold = int(row[0])
+
+            if number_sold >= MAX_TICKETS:
+                answer = ("{\"ordered\":%d, \"last_order\":\"2017-07-04 13:37:23.424242\", \"tickets_left\":0}\n" %
+                          MAX_TICKETS)
+            else:
+                answer = ("{\"ordered\":%d, \"last_order\":\"%s\", \"tickets_left\":%d}\n" %
+                          (row[0], row[1], MAX_TICKETS - number_sold))
 
         db.close()
 
