@@ -10,7 +10,7 @@ DATABASE_DB = 'pretix'
 SERVER_IP = '0.0.0.0'
 SERVER_PORT = 4242
 
-MAX_TICKETS = 3050
+MAX_TICKETS = 3650
 
 
 class MyHandler(http.server.BaseHTTPRequestHandler):
@@ -60,7 +60,7 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
             number_sold = int(row[0])
 
             if number_sold >= MAX_TICKETS:
-                answer = ("{\"ordered\":%d, \"last_order\":\"2017-07-04 13:37:23.424242\", \"tickets_left\":0}\n" %
+                answer = ("{\"ordered\":%d, \"last_order\":\"2017-08-04 13:37:23.424242\", \"tickets_left\":0}\n" %
                           MAX_TICKETS)
             else:
                 answer = ("{\"ordered\":%d, \"last_order\":\"%s\", \"tickets_left\":%d}\n" %
